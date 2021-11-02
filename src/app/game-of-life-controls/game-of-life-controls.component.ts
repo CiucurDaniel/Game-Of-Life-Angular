@@ -15,9 +15,10 @@ export class GameOfLifeControlsComponent {
   constructor(private gameOfLifeService: GameOfLifeService) {
   }
 
-  // method called when Start button is pressed in order to start the game
+
   start() {
     this.gameOfLifeService.computeNextGeneration();
+
     //this.intervalId = window.setInterval(() => {
    //   this.gameOfLifeService.computeNextGeneration(this.gameOfLifeService.gameOfLifeGrid);
    // }, 400);

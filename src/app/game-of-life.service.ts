@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GameOfLifeService {
-  static count: number = 0;
+
+  static generationCount: number = 1;
 
   columns = 10;
   rows = 10;
@@ -35,8 +36,7 @@ export class GameOfLifeService {
 
       for(let j = 1; j < receivedGrid[i].length - 1; j++) {
 
-        futureGeneration[i][j] =
-                this.applyRulesForCurrentCell( this.gameOfLifeGrid[i][j], this.countAliveNeighbours(i,j) );
+        futureGeneration[i][j] = this.applyRulesForCurrentCell( receivedGrid[i][j], this.countAliveNeighbours(i,j) );
 
         if(futureGeneration[i][j]){
           console.log(`Successfully assigned ${futureGeneration[i][j]} on ${i} and ${j}`);
@@ -49,9 +49,10 @@ export class GameOfLifeService {
     // next generation fully computed, substitute it as current generation
     this.gameOfLifeGrid = futureGeneration;
 
-    GameOfLifeService.count++;
-    console.log(`Generation ${GameOfLifeService.count}`)
-    console.log(futureGeneration);
+    GameOfLifeService.generationCount++;
+
+    console.log(GameOfLifeService.generationCount);
+    console.log(this.gameOfLifeGrid);
 
     return this.gameOfLifeGrid;
   }
@@ -101,7 +102,6 @@ export class GameOfLifeService {
 
     // A new cell is born
     if (!cellState && aliveNeighbours == 3) {
-      console.log(`${cellState} CELL CREATED: applyRulesForCurrentCell`);
       return true;
     }
 
@@ -109,9 +109,22 @@ export class GameOfLifeService {
       return cellState;
   }
 
+  /*
+  Helper function used to create an empty grid
+   */
   createEmptyGrid(): boolean[][]{
 
-    return new Array(this.rows).fill(
-      new Array(this.columns).fill(false));
+    return [
+      [false,false,false,false,false,false,false,false,false,false],
+      [false,false,false,false,false,false,false,false,false,false],
+      [false,false,false,false,false,false,false,false,false,false],
+      [false,false,false,false,false,false,false,false,false,false],
+      [false,false,false,false,false,false,false,false,false,false],
+      [false,false,false,false,false,false,false,false,false,false],
+      [false,false,false,false,false,false,false,false,false,false],
+      [false,false,false,false,false,false,false,false,false,false],
+      [false,false,false,false,false,false,false,false,false,false],
+      [false,false,false,false,false,false,false,false,false,false],
+    ];
   }
 }

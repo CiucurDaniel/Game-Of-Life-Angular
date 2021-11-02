@@ -38,10 +38,6 @@ export class GameOfLifeService {
 
         futureGeneration[i][j] = this.applyRulesForCurrentCell( receivedGrid[i][j], this.countAliveNeighbours(i,j) );
 
-        if(futureGeneration[i][j]){
-          console.log(`Successfully assigned ${futureGeneration[i][j]} on ${i} and ${j}`);
-        }
-
       }
     }
 
@@ -50,9 +46,6 @@ export class GameOfLifeService {
     this.gameOfLifeGrid = futureGeneration;
 
     GameOfLifeService.generationCount++;
-
-    console.log(GameOfLifeService.generationCount);
-    console.log(this.gameOfLifeGrid);
 
     return this.gameOfLifeGrid;
   }

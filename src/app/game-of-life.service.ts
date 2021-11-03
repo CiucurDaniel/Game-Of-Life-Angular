@@ -17,10 +17,10 @@ export class GameOfLifeService {
     this.gameOfLifeGrid = [
       [false,false,false,false,false,false,false,false,false,false],
       [false,false,false,false,false,false,false,false,false,false],
+      [false,true,false,false,false,false,true,false,false,false],
+      [false,true,false,false,true,false,true,false,false,false],
+      [false,true,false,false,false,true,true,false,false,false],
       [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,true,false,false,false,false,false],
-      [false,false,false,false,true,false,false,false,false,false],
-      [false,false,false,false,true,false,false,false,false,false],
       [false,false,false,false,false,false,false,false,false,false],
       [false,false,false,false,false,false,false,false,false,false],
       [false,false,false,false,false,false,false,false,false,false],

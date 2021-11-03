@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {GameOfLifeService} from "../game-of-life.service";
 
 @Component({
@@ -6,13 +6,8 @@ import {GameOfLifeService} from "../game-of-life.service";
   templateUrl: './game-of-life-grid.component.html',
   styleUrls: ['./game-of-life-grid.component.css']
 })
-export class GameOfLifeGridComponent implements OnInit{
-  arrayWithCells?: boolean[];
+export class GameOfLifeGridComponent{
 
-  constructor(private gameOfLifeService: GameOfLifeService) {
-  }
+  @Input() arrayWithCells?: boolean[];
 
-  ngOnInit() {
-    this.arrayWithCells = ([] as boolean[]).concat(...this.gameOfLifeService.gameOfLifeGrid);
-  }
 }

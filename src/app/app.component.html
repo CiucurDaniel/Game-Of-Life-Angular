@@ -1,7 +1,7 @@
 <game-of-life-header></game-of-life-header>
 <main>
-  <game-of-life-grid></game-of-life-grid>
-  <game-of-life-controls></game-of-life-controls>
+  <game-of-life-grid [arrayWithCells]="storedArrayWithCells"></game-of-life-grid>
+  <game-of-life-controls (newGameOfLifeGridGenerated)="onNewGameOfLifeGridGenerated($event)"></game-of-life-controls>
 </main>
 
 

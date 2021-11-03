@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {GameOfLifeService} from "../game-of-life.service";
 
 
@@ -7,36 +7,26 @@ import {GameOfLifeService} from "../game-of-life.service";
   templateUrl: './game-of-life-controls.component.html',
   styleUrls: ['./game-of-life-controls.component.css']
 })
-export class GameOfLifeControlsComponent {
+export class GameOfLifeControlsComponent implements OnInit{
 
-  //private intervalId?: number;
-  //private _isRunning?: boolean;
+  arrayWithCells?: boolean[];
+
+  @Output() newGameOfLifeGridGenerated = new EventEmitter();
 
   constructor(private gameOfLifeService: GameOfLifeService) {
   }
 
-
-  start() {
-    this.gameOfLifeService.computeNextGeneration();
-
-    //this.intervalId = window.setInterval(() => {
-   //   this.gameOfLifeService.computeNextGeneration(this.gameOfLifeService.gameOfLifeGrid);
-   // }, 400);
-   // this._isRunning = true;
+  ngOnInit() {
+    // I also call the service onInit because I want to have an initial grid with cells when the page is first loaded
+    this.arrayWithCells = ([] as boolean[]).concat(...this.gameOfLifeService.gameOfLifeGrid);
   }
 
-  // Stop the game
-  stop(): void{
-
+  onStartClicked(): void {
+    // when I click the start button get the next generation
+    this.arrayWithCells = ([] as boolean[]).concat(...this.gameOfLifeService.computeNextGeneration());
+    // afterwards emit it's value
+    this.newGameOfLifeGridGenerated.emit(this.arrayWithCells);
   }
 
 
-  // Reset the game
-  reset(): void{
-
-  }
-
-  getGenerationCount(): void{
-
-  }
 }

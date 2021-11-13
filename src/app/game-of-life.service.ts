@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -7,36 +7,25 @@ export class GameOfLifeService {
 
   static generationCount: number = 1;
 
-  columns = 10;
-  rows = 10;
+  // for simplicity we will make our matrix a square
+  matrixSize = 10;
 
-  gameOfLifeGrid: boolean[][] = [][this.columns];
+  gameOfLifeGrid: boolean[][] = [][this.matrixSize];
 
 
   constructor() {
-    this.gameOfLifeGrid = [
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,true,false,false,false,false,true,false,false,false],
-      [false,true,false,false,true,false,true,false,false,false],
-      [false,true,false,false,false,true,true,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-    ];
+    this.gameOfLifeGrid = this.createRandomGrid();
   }
 
   computeNextGeneration(receivedGrid: boolean[][] = this.gameOfLifeGrid): boolean[][] {
 
     let futureGeneration: boolean[][] = this.createEmptyGrid();
 
-    for(let i = 1; i < receivedGrid.length -1; i++) {
+    for (let i = 1; i < receivedGrid.length - 1; i++) {
 
-      for(let j = 1; j < receivedGrid[i].length - 1; j++) {
+      for (let j = 1; j < receivedGrid[i].length - 1; j++) {
 
-        futureGeneration[i][j] = this.applyRulesForCurrentCell( receivedGrid[i][j], this.countAliveNeighbours(i,j) );
+        futureGeneration[i][j] = this.applyRulesForCurrentCell(receivedGrid[i][j], this.countAliveNeighbours(i, j));
 
       }
     }
@@ -57,7 +46,7 @@ export class GameOfLifeService {
     let aliveNeighbours: number = 0;
     for (let i = (-1); i <= 1; i++) {
 
-      for (let j = (-1); j <= 1; j++){
+      for (let j = (-1); j <= 1; j++) {
 
         this.gameOfLifeGrid[row + i][column + j] ? aliveNeighbours += 1 : aliveNeighbours += 0;
 
@@ -65,7 +54,7 @@ export class GameOfLifeService {
     }
 
     // in case the current cell was alive, we also counted it above
-    if(this.gameOfLifeGrid[row][column]) {
+    if (this.gameOfLifeGrid[row][column]) {
       aliveNeighbours -= 1;
     }
 
@@ -89,7 +78,7 @@ export class GameOfLifeService {
     }
 
     // Any live cell with more than three live neighbours dies, as if by overpopulation.
-    if (cellState && aliveNeighbours > 3){
+    if (cellState && aliveNeighbours > 3) {
       return false;
     }
 
@@ -99,25 +88,38 @@ export class GameOfLifeService {
     }
 
     // Remain the same
-      return cellState;
+    return cellState;
   }
+
+
+  /*
+  Helper function used to create a random grid
+   */
+  createRandomGrid(): boolean[][] {
+
+    let emptyGrid: any = [];
+    for (let i = 0; i < this.matrixSize; i++) {
+      emptyGrid[i] = [];
+      for (let j = 0; j < this.matrixSize; j++) {
+        emptyGrid[i][j] = Math.random() < 0.1; // 10% change of getting true
+      }
+    }
+    return emptyGrid;
+  }
+
 
   /*
   Helper function used to create an empty grid
    */
-  createEmptyGrid(): boolean[][]{
+  createEmptyGrid(): boolean[][] {
 
-    return [
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-      [false,false,false,false,false,false,false,false,false,false],
-    ];
+    let emptyGrid: any = [];
+    for (let i = 0; i < this.matrixSize; i++) {
+      emptyGrid[i] = [];
+      for (let j = 0; j < this.matrixSize; j++) {
+        emptyGrid[i][j] = false;
+      }
+    }
+    return emptyGrid;
   }
 }

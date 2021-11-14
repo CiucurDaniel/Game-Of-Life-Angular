@@ -8,7 +8,7 @@ export class GameOfLifeService {
   static generationCount: number = 1;
 
   // for simplicity we will make our matrix a square
-  matrixSize = 10;
+  matrixSize = 60;
 
   gameOfLifeGrid: boolean[][] = [][this.matrixSize];
 

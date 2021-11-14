@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,22 @@ export class GameOfLifeService {
   gameOfLifeGrid: boolean[][] = [][this.matrixSize];
 
 
+  private gameOfLifeGridUpdated = new Subject<boolean[][]>();
+
+
   constructor() {
+    // create the initial grid
     this.gameOfLifeGrid = this.createRandomGrid();
+
+    // send the grid to subscribers right-away
+    this.gameOfLifeGridUpdated.next(this.gameOfLifeGrid);
   }
 
-  computeNextGeneration(receivedGrid: boolean[][] = this.gameOfLifeGrid): boolean[][] {
+  getGameOfLifeGridUpdatedListener() {
+    return this.gameOfLifeGridUpdated.asObservable();
+  }
+
+  computeNextGeneration(receivedGrid: boolean[][] = this.gameOfLifeGrid): void {
 
     let futureGeneration: boolean[][] = this.createEmptyGrid();
 
@@ -36,7 +48,8 @@ export class GameOfLifeService {
 
     GameOfLifeService.generationCount++;
 
-    return this.gameOfLifeGrid;
+    this.gameOfLifeGridUpdated.next(this.gameOfLifeGrid);
+    //return this.gameOfLifeGrid; no more return, just give the value to subscribers
   }
 
   /*

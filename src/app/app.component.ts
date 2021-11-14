@@ -6,19 +6,6 @@ import {GameOfLifeService} from "./game-of-life.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'angular-game-of-life';
-
-  storedArrayWithCells?: boolean[];
-
-  constructor(private gameOfLifeService: GameOfLifeService) {
-  }
-
-  ngOnInit() {
-    this.storedArrayWithCells = ([] as boolean[]).concat(...this.gameOfLifeService.gameOfLifeGrid);
-  }
-
-  onNewGameOfLifeGridGenerated(newGrid: any): void {
-    this.storedArrayWithCells = newGrid;
-  }
 }

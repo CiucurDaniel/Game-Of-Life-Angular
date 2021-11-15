@@ -29,15 +29,17 @@ export class GameOfLifeService {
     return this.gameOfLifeGridUpdated.asObservable();
   }
 
-  computeNextGeneration(receivedGrid: boolean[][] = this.gameOfLifeGrid): void {
+  computeNextGeneration(): void {
+
+    let grid = this.gameOfLifeGrid;
 
     let futureGeneration: boolean[][] = this.createEmptyGrid();
 
-    for (let i = 1; i < receivedGrid.length - 1; i++) {
+    for (let i = 1; i < grid.length - 1; i++) {
 
-      for (let j = 1; j < receivedGrid[i].length - 1; j++) {
+      for (let j = 1; j < grid[i].length - 1; j++) {
 
-        futureGeneration[i][j] = this.applyRulesForCurrentCell(receivedGrid[i][j], this.countAliveNeighbours(i, j));
+        futureGeneration[i][j] = this.applyRulesForCurrentCell(grid[i][j], this.countAliveNeighbours(i, j));
 
       }
     }

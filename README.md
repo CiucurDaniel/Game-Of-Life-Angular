@@ -1,4 +1,10 @@
+<img src="documentation/favicon.png" width="50">
+
 # AngularGameOfLife
+
+
+[![Made with](https://img.shields.io/badge/AngularCLI-v12.2.12-red)](https://angular.io/)
+
 
 <img src="/documentation/gameOfLifeHomepage.PNG" alt="game of life homepage">
 

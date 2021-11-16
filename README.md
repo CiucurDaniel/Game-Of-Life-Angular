@@ -1,5 +1,7 @@
 # AngularGameOfLife
 
+<img src="/documentation/gameOfLifeHomepage.PNG" alt="game of life homepage">
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.12.
 
 ## Development server

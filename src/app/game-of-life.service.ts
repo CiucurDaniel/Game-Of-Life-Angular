@@ -116,7 +116,7 @@ export class GameOfLifeService {
     for (let i = 0; i < this.matrixSize; i++) {
       emptyGrid[i] = [];
       for (let j = 0; j < this.matrixSize; j++) {
-        emptyGrid[i][j] = Math.random() < 0.1; // 10% change of getting true
+        emptyGrid[i][j] = Math.random() < 0.3; // 10% change of getting true
       }
     }
     return emptyGrid;

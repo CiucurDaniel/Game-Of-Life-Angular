@@ -7,12 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // imports from Angular Material
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatButtonModule} from '@angular/material/button';
 
 // imports from components created in this projects
 import {GameOfLifeHeaderComponent} from "./game-of-life-header/game-of-life-header.component";
 import {GameOfLifeGridComponent} from "./game-of-life-grid/game-of-life-grid.component";
 import {GameOfLifeControlsComponent} from "./game-of-life-controls/game-of-life-controls.component";
-import {MatButtonModule} from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
